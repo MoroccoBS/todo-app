@@ -3,3 +3,5 @@ import { authOptions } from "../auth/[...nextauth]/route";
 export default async function getSession() {
   return await getServerSession(authOptions);
 }
+
+export const dynamic = "force-dynamic";
