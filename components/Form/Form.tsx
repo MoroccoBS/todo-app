@@ -8,16 +8,11 @@ import { BsArrowLeft, BsGithub, BsGoogle } from "react-icons/bs";
 import { motion } from "framer-motion";
 import toast from "react-hot-toast";
 import axios from "axios";
-import dynamic from "next/dynamic";
 import { signIn } from "next-auth/react";
-const ThemeSwitch = dynamic(() => import("../ThemeSwitch"), {
-  ssr: false,
-  loading: () => <></>,
-});
+import ThemeSwitch from "../ThemeSwitch";
 import { ImSpinner8 } from "react-icons/im";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import getUser from "@/app/api/actions/getUser";
 
 export default function Form() {
   const [variants, setVariants] = useState<"LOGIN" | "REGISTER">("LOGIN");

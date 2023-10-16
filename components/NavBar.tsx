@@ -1,13 +1,7 @@
-import dynamic from "next/dynamic";
 import Logo from "./Logo";
 import { Skeleton } from "./ui/skeleton";
 import Profile from "./Profile";
-const ThemeSwitch = dynamic(() => import("./ThemeSwitch"), {
-  ssr: false,
-  loading: () => (
-    <Skeleton className="ml-auto w-8 h-8 aspect-square rounded-full overflow-hidden relative" />
-  ),
-});
+import ThemeSwitch from "./ThemeSwitch";
 import { User, Todo as TodoType } from "@prisma/client";
 
 interface NavBarProps {
@@ -21,18 +15,6 @@ export default function NavBar({ setListOfTodos, user }: NavBarProps) {
       <Logo />
       <ThemeSwitch />
       <Profile image={user?.image} setListOfTodos={setListOfTodos} />
-      {/* {session ? (
-        <Profile />
-      ) : (
-        <Button
-          onClick={() => Open(true)}
-          className="text-xl"
-          variant="flat"
-          color="default"
-        >
-          LogIn
-        </Button>
-      )} */}
     </div>
   );
 }
