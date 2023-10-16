@@ -2,26 +2,118 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body,
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  @apply h-full;
 }
 
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+
+    --radius: 0.5rem;
+
+    --BrightBlue: hsl(220, 98%, 61%);
+    --CheckBackground: linear-gradient(
+      135deg,
+      hsl(192, 100%, 67%) 0%,
+      hsl(280, 87%, 65%) 100%
+    );
+    --CheckOut: hsl(233, 14%, 35%);
+
+    --MainColor: hsl(0, 0%, 98%);
+    --BodyBg: hsl(236, 33%, 92%);
+    --Completed: hsl(233, 11%, 84%);
+    --NotActive: hsl(236, 9%, 61%);
+    --Text: hsl(235, 19%, 35%);
+    --BgMobile: url("/images/bg-mobile-light.jpg");
+    --BgDesktop: url("/images/bg-desktop-light.jpg");
+    --Gradient: url("/images/gradient.jpg");
+  }
+
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+
+    --BrightBlue: hsl(220, 98%, 61%);
+    --MainColor: hsl(235, 24%, 19%);
+    --Text: hsl(234, 39%, 85%);
+    --LightGrayishBlueHover: hsl(236, 33%, 92%);
+    --NotActive: hsl(234, 11%, 52%);
+
+    /* --Completed: hsl(237, 14%, 26%); */
+    --Completed: hsl(235, 13%, 35%);
+    --BodyBg: hsl(235, 21%, 11%);
+    --BgMobile: url("/images/bg-mobile-dark.jpg");
+    --BgDesktop: url("/images/bg-desktop-dark.jpg");
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-bodyBg text-foreground;
+  }
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+.manager-shadow {
+  box-shadow: 0 -2em 2em rgba(0, 0, 0, 0.15);
 }
