@@ -56,6 +56,7 @@ body,
     --BgMobile: url("/images/bg-mobile-light.jpg");
     --BgDesktop: url("/images/bg-desktop-light.jpg");
     --Gradient: url("/images/gradient.jpg");
+    --TodoBorder: hsl(255, 8%, 90%);
   }
 
   .dark {
@@ -98,6 +99,8 @@ body,
     --BodyBg: hsl(235, 21%, 11%);
     --BgMobile: url("/images/bg-mobile-dark.jpg");
     --BgDesktop: url("/images/bg-desktop-dark.jpg");
+    --TodoBorder: hsl(235, 18%, 26%);
+    --cont-shadow: 0 0 0 100vw rgba(0, 0, 0, 0.5);
   }
 }
 
@@ -115,5 +118,5 @@ body,
 }
 
 .manager-shadow {
-  box-shadow: 0 -2em 2em rgba(0, 0, 0, 0.15);
+  box-shadow: 0 -2em 2em rgba(0, 0, 0, 0.15), 0 2.5em 5em rgba(0, 0, 0, 0.25);
 }

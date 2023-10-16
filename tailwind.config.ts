@@ -28,6 +28,7 @@ module.exports = {
         notActive: "var(--NotActive)",
         brightBlue: "var(--BrightBlue)",
         text: "var(--Text)",
+        TodoBorder: "var(--TodoBorder)",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",

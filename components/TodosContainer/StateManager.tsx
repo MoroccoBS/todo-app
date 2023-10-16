@@ -1,10 +1,9 @@
 "use client";
 
-import axios from "axios";
-import toast from "react-hot-toast";
 import { Todo as TodoType, User } from "@prisma/client";
 import DeleteModal from "../DeleteModal";
 import { useState } from "react";
+import ActiveSelector from "./ActiveSelector";
 
 interface StateManagerProps {
   activeTodos: "LISTOFTODOS" | "COMPLETED" | "INCOMPLETE";
@@ -25,43 +24,50 @@ export default function StateManager({
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="w-full bg-mainColor px-6 py-4 flex justify-between z-40 mt-9 manager-shadow">
-      <h1 className="text-foreground/30 w-full">{numberOfTodos} Items Left</h1>
-      <div className="flex gap-4 items-center w-full">
-        <h1
-          className={`text-foreground/30 hover:text-foreground cursor-pointer transition-all duration-300 ${
-            activeTodos === "LISTOFTODOS" &&
-            "text-sky-600 hover:text-sky-600 font-bold"
-          }`}
+    <div className="w-full bg-mainColor px-6 py-4 flex justify-between z-40 manager-shadow relative">
+      <h1 className="text-foreground/30 sm:w-full">
+        {numberOfTodos} Items Left
+      </h1>
+      <div className="sm:flex gap-4 items-center w-full hidden">
+        <ActiveSelector
+          type="All"
+          isActive={activeTodos === "LISTOFTODOS"}
           onClick={() => setActiveTodos("LISTOFTODOS")}
-        >
-          All
-        </h1>
-        <h1
-          className={`text-foreground/30 hover:text-foreground cursor-pointer transition-all duration-300 ${
-            activeTodos === "INCOMPLETE" &&
-            "text-sky-600 hover:text-sky-600 font-bold"
-          }`}
+        />
+        <ActiveSelector
+          type="Active"
+          isActive={activeTodos === "INCOMPLETE"}
           onClick={() => setActiveTodos("INCOMPLETE")}
-        >
-          Active
-        </h1>
-        <h1
-          className={`text-foreground/30 hover:text-foreground cursor-pointer transition-all duration-300 ${
-            activeTodos === "COMPLETED" &&
-            "text-sky-600 hover:text-sky-600 font-bold"
-          }`}
+        />
+        <ActiveSelector
+          type="Completed"
+          isActive={activeTodos === "COMPLETED"}
           onClick={() => setActiveTodos("COMPLETED")}
-        >
-          Completed
-        </h1>
+        />
       </div>
       <h1
-        className="text-foreground/30 hover:text-foreground cursor-pointer transition-all duration-300 w-full text-right"
+        className="text-foreground/30 hover:text-foreground cursor-pointer transition-all duration-300 sm:w-full text-right "
         onClick={() => setOpen(true)}
       >
         Clear Completed
       </h1>
+      <div className="flex justify-center rounded-md gap-4 items-center w-full px-4 py-4 sm:hidden absolute top-full translate-y-1/2 bg-mainColor left-1/2 -translate-x-1/2">
+        <ActiveSelector
+          type="All"
+          isActive={activeTodos === "LISTOFTODOS"}
+          onClick={() => setActiveTodos("LISTOFTODOS")}
+        />
+        <ActiveSelector
+          type="Active"
+          isActive={activeTodos === "INCOMPLETE"}
+          onClick={() => setActiveTodos("INCOMPLETE")}
+        />
+        <ActiveSelector
+          type="Completed"
+          isActive={activeTodos === "COMPLETED"}
+          onClick={() => setActiveTodos("COMPLETED")}
+        />
+      </div>
       <DeleteModal
         isOpen={open}
         setIsOpen={setOpen}

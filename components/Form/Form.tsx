@@ -17,6 +17,7 @@ const ThemeSwitch = dynamic(() => import("../ThemeSwitch"), {
 import { ImSpinner8 } from "react-icons/im";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import getUser from "@/app/api/actions/getUser";
 
 export default function Form() {
   const [variants, setVariants] = useState<"LOGIN" | "REGISTER">("LOGIN");

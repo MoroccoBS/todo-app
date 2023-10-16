@@ -1,4 +1,6 @@
 import { motion } from "framer-motion";
+import { useState } from "react";
+import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 
 interface InputProps {
   placeholder: string;
@@ -23,8 +25,9 @@ export default function Input({
   onFocus,
   loading,
 }: InputProps) {
+  const [showPassword, setShowPassword] = useState(false);
   return (
-    <div className="w-full flex flex-col gap-2">
+    <div className="w-full flex flex-col gap-2 relative">
       <div className="flex items-center justify-between w-full">
         <h1 className="text-lg">{label}</h1>
         {isError && error && (
@@ -44,11 +47,23 @@ export default function Input({
           isError ? "outline-red-500/80 outline-2" : ""
         } disabled:cursor-wait`}
         placeholder={placeholder}
-        type={type}
+        type={type === "password" && showPassword ? "text" : type}
         value={value}
         onChange={onChange}
         onFocus={onFocus}
       />
+      {type === "password" && value && (
+        <div
+          className="absolute right-12 top-1/2 text-3xl bg-red-600 opacity-50 hover:opacity-100 transition-all cursor-pointer select-none"
+          onClick={() => setShowPassword(!showPassword)}
+        >
+          {showPassword ? (
+            <AiOutlineEyeInvisible className="absolute translate-y-[3px]" />
+          ) : (
+            <AiOutlineEye className="absolute translate-y-[3px]" />
+          )}
+        </div>
+      )}
     </div>
   );
 }

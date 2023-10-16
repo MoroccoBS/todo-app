@@ -5,6 +5,7 @@ import Input from "./Input";
 import Todos from "./Todos";
 import { User, Todo as TodoType } from "@prisma/client";
 import StateManager from "./StateManager";
+import NavBar from "../NavBar";
 
 interface TodosContainerProps {
   user: User | undefined | null;
@@ -32,25 +33,32 @@ export default function TodosContainer({ user, todos }: TodosContainerProps) {
     return listOfTodos.filter((todo) => !todo.completed);
   }, [listOfTodos]);
   return (
-    <div className="w-full h-full flex flex-col mt-10 relative">
-      <Input user={user} setListOfTodos={setListOfTodos} todos={listOfTodos} />
-      <Todos
-        setListOfTodos={setListOfTodos}
-        listOfTodos={
-          activeTodos === "LISTOFTODOS"
-            ? listOfTodos
-            : activeTodos === "COMPLETED"
-            ? completedTodos
-            : incompleteTodos
-        }
-      />
-      <StateManager
-        activeTodos={activeTodos}
-        setActiveTodos={setActiveTodos}
-        setListOfTodos={setListOfTodos}
-        numberOfTodos={incompleteTodos.length}
-        user={user}
-      />
-    </div>
+    <>
+      <NavBar setListOfTodos={setListOfTodos} user={user} />
+      <div className="w-full h-full flex flex-col mt-10 relative">
+        <Input
+          user={user}
+          setListOfTodos={setListOfTodos}
+          todos={listOfTodos}
+        />
+        <Todos
+          setListOfTodos={setListOfTodos}
+          listOfTodos={
+            activeTodos === "LISTOFTODOS"
+              ? listOfTodos
+              : activeTodos === "COMPLETED"
+              ? completedTodos
+              : incompleteTodos
+          }
+        />
+        <StateManager
+          activeTodos={activeTodos}
+          setActiveTodos={setActiveTodos}
+          setListOfTodos={setListOfTodos}
+          numberOfTodos={incompleteTodos.length}
+          user={user}
+        />
+      </div>
+    </>
   );
 }
