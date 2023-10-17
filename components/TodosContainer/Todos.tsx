@@ -55,19 +55,12 @@ export default function Todos({ listOfTodos, setListOfTodos }: TodoProps) {
 
   const handleReorder = async (newOrder: TodoType[]) => {
     setListOfTodos(newOrder);
-    console.log(newOrder);
     for (let i = 0; i < newOrder.length; i++) {
       const todo = newOrder[i];
-      console.log(todo.id);
-      console.log(i);
-      await axios
-        .put("api/handleTodo", {
-          todoId: todo.id,
-          position: i + 1,
-        })
-        .then((res) => {
-          console.log(res.data);
-        });
+      await axios.put("api/handleTodo", {
+        todoId: todo.id,
+        position: i + 1,
+      });
     }
   };
 
@@ -81,7 +74,6 @@ export default function Todos({ listOfTodos, setListOfTodos }: TodoProps) {
     const newOrder = arrayMove(listOfTodos, oldIndex, newIndex);
     setListOfTodos(newOrder);
     handleReorder(newOrder);
-    console.log(event);
   };
 
   return (

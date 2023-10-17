@@ -58,7 +58,6 @@ export default function Input({ user, setListOfTodos, todos }: InputProps) {
             userId: user?.id as string,
           })
           .then((res) => {
-            console.log(res.data);
             setListOfTodos((prev) => [...prev, res.data]);
             setTodo("");
             setLoading(false);

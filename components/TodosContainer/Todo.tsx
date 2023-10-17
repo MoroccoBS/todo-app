@@ -70,7 +70,6 @@ export default function Todo({ todo, setTodos }: TodoProps) {
             },
           })
           .then((res) => {
-            console.log(res.data);
             setTodos?.((prev) =>
               prev.filter((prevTodo) => prevTodo.id !== res.data.id)
             );
@@ -98,7 +97,6 @@ export default function Todo({ todo, setTodos }: TodoProps) {
             completed: !isComplete,
           })
           .then((res) => {
-            console.log(res.data);
             setTodos?.((prev) =>
               prev.map((prevTodo) =>
                 prevTodo.id === res.data.id ? res.data : prevTodo
