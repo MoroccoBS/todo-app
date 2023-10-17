@@ -6,13 +6,14 @@ import Todos from "./Todos";
 import { User, Todo as TodoType } from "@prisma/client";
 import StateManager from "./StateManager";
 import NavBar from "../NavBar";
+import { useSession } from "next-auth/react";
+import axios from "axios";
 
 interface TodosContainerProps {
-  user: User | undefined | null;
   todos: TodoType[] | undefined | null;
 }
 
-export default function TodosContainer({ user, todos }: TodosContainerProps) {
+export default function TodosContainer({ todos }: TodosContainerProps) {
   const [listOfTodos, setListOfTodos] = useState<TodoType[]>(
     (todos &&
       todos.sort(
@@ -20,6 +21,10 @@ export default function TodosContainer({ user, todos }: TodosContainerProps) {
       )) ||
       []
   );
+  const session = useSession();
+  console.log(session);
+
+  const todoss = axios.get("/api/getTodos");
 
   const [activeTodos, setActiveTodos] = useState<
     "LISTOFTODOS" | "COMPLETED" | "INCOMPLETE"
@@ -34,13 +39,9 @@ export default function TodosContainer({ user, todos }: TodosContainerProps) {
   }, [listOfTodos]);
   return (
     <>
-      <NavBar setListOfTodos={setListOfTodos} user={user} />
+      <NavBar setListOfTodos={setListOfTodos} />
       <div className="w-full h-full flex flex-col mt-10 relative">
-        <Input
-          user={user}
-          setListOfTodos={setListOfTodos}
-          todos={listOfTodos}
-        />
+        <Input setListOfTodos={setListOfTodos} todos={listOfTodos} />
         <Todos
           setListOfTodos={setListOfTodos}
           listOfTodos={
@@ -56,7 +57,6 @@ export default function TodosContainer({ user, todos }: TodosContainerProps) {
           setActiveTodos={setActiveTodos}
           setListOfTodos={setListOfTodos}
           numberOfTodos={incompleteTodos.length}
-          user={user}
         />
       </div>
     </>

@@ -18,20 +18,18 @@ interface DeleteModalProps {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setListOfTodos: React.Dispatch<React.SetStateAction<TodoType[]>>;
-  user: User | undefined | null;
 }
 
 export default function DeleteModal({
   isOpen,
   setIsOpen,
   setListOfTodos,
-  user,
 }: DeleteModalProps) {
   const handleClearAll = async () => {
     try {
       await toast.promise(
         axios
-          .delete("/api/clearAll", { data: { userId: user?.id } })
+          .delete("/api/clearAll")
           .then(() =>
             setListOfTodos((prev) => prev.filter((todo) => !todo.completed))
           )

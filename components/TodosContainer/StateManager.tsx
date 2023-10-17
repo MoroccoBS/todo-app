@@ -12,14 +12,12 @@ interface StateManagerProps {
   >;
   numberOfTodos: number;
   setListOfTodos: React.Dispatch<React.SetStateAction<TodoType[]>>;
-  user: User | undefined | null;
 }
 export default function StateManager({
   activeTodos,
   setActiveTodos,
   numberOfTodos,
   setListOfTodos,
-  user,
 }: StateManagerProps) {
   const [open, setOpen] = useState(false);
 
@@ -72,7 +70,6 @@ export default function StateManager({
         isOpen={open}
         setIsOpen={setOpen}
         setListOfTodos={setListOfTodos}
-        user={user}
       />
     </div>
   );

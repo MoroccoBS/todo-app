@@ -1,3 +1,4 @@
+"use client";
 import { Todo as TodoType } from "@prisma/client";
 import Image from "next/image";
 import {
@@ -7,15 +8,16 @@ import {
   DropdownMenuSeparator,
 } from "./ui/dropdown-menu";
 import { Button } from "./ui/button";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import toast from "react-hot-toast";
+import image from "next/image";
 
 interface ProfileProps {
   setListOfTodos: React.Dispatch<React.SetStateAction<TodoType[]>>;
-  image: string | undefined | null;
 }
 
-export default function Profile({ setListOfTodos, image }: ProfileProps) {
+export default function Profile({ setListOfTodos }: ProfileProps) {
+  const session = useSession();
   const handleLogOut = async () => {
     try {
       await toast.promise(
@@ -39,7 +41,7 @@ export default function Profile({ setListOfTodos, image }: ProfileProps) {
     <DropdownMenu>
       <DropdownMenuTrigger className="w-12 aspect-square rounded-full overflow-hidden relative cursor-pointer shadow-lg hover:scale-105 transition-all">
         <Image
-          src={image || "/41.png"}
+          src={session.data?.user?.image || "/41.png"}
           alt="AvatarFallback"
           fill
           className="object-cover w-full h-full"

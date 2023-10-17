@@ -7,12 +7,11 @@ import { User } from "@prisma/client";
 import { Todo as TodoType } from "@prisma/client";
 
 interface InputProps {
-  user: User | undefined | null;
   todos: TodoType[] | undefined | null;
   setListOfTodos: React.Dispatch<React.SetStateAction<TodoType[]>>;
 }
 
-export default function Input({ user, setListOfTodos, todos }: InputProps) {
+export default function Input({ setListOfTodos, todos }: InputProps) {
   const [error, setError] = useState(false);
   const [todo, setTodo] = useState("");
   const [loading, setLoading] = useState(false);
@@ -55,7 +54,6 @@ export default function Input({ user, setListOfTodos, todos }: InputProps) {
           .post("/api/handleTodo", {
             todo,
             position: max + 1,
-            userId: user?.id as string,
           })
           .then((res) => {
             console.log(res.data);
