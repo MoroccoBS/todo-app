@@ -14,7 +14,7 @@ export default function NavBar({ setListOfTodos, user }: NavBarProps) {
     <div className={`w-full py-5 flex items-center text-white gap-4 pr-2`}>
       <Logo />
       <ThemeSwitch />
-      <Profile image={user?.image} setListOfTodos={setListOfTodos} />
+      <Profile user={user} setListOfTodos={setListOfTodos} />
     </div>
   );
 }

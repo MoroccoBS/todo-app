@@ -7,7 +7,6 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -58,8 +57,8 @@ export default function DeleteModal({
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
+            This action cannot be undone. This will permanently delete all your
+            completed todos on our servers.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
@@ -67,11 +66,11 @@ export default function DeleteModal({
             Cancel
           </AlertDialogCancel>
           <Button
-            variant={"destructive"}
-            className="text-lg"
+            variant={"default"}
+            className="text-lg hover:bg-destructive hover:text-destructive-foreground transition-all"
             onClick={handleClearAll}
           >
-            Continue
+            Delete All
           </Button>
         </AlertDialogFooter>
       </AlertDialogContent>
