@@ -5,6 +5,9 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { User } from "@prisma/client";
 import { Todo as TodoType } from "@prisma/client";
+import { Button } from "../ui/button";
+import { Plus } from "lucide-react";
+import ToolTip from "./ToolTip";
 
 interface InputProps {
   user: User | undefined | null;
@@ -17,19 +20,6 @@ export default function Input({ user, setListOfTodos, todos }: InputProps) {
   const [todo, setTodo] = useState("");
   const [loading, setLoading] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout>();
-
-  // const handleAddTodo = () => {
-  //   document.documentElement.style.setProperty(
-  //     "--foreground",
-  //     "0 100% 50%",
-  //     "important"
-  //   );
-  //   console.log(
-  //     getComputedStyle(document.documentElement).getPropertyValue(
-  //       "--foreground"
-  //     )
-  //   );
-  // };
 
   const handleAddTodo = async () => {
     if (!todo) {
@@ -80,9 +70,14 @@ export default function Input({ user, setListOfTodos, todos }: InputProps) {
         error && "outline outline-2 outline-red-500"
       }`}
     >
-      <CheckBox onClick={() => handleAddTodo()} />
+      <CheckBox
+        onClick={() => handleAddTodo()}
+        className="absolute"
+        isAdd={true}
+        checked={false}
+      />
       <input
-        className={`w-full h-full bg-transparent outline-none placeholder:text-Text/50 placeholder:text-base text-lg`}
+        className={`w-full h-full bg-transparent outline-none placeholder:text-Text/50 placeholder:text-base text-lg ml-12`}
         disabled={loading}
         type="text"
         placeholder={
@@ -101,6 +96,13 @@ export default function Input({ user, setListOfTodos, todos }: InputProps) {
           }
         }}
       />
+      <ToolTip />
+      {/* <Button
+        className="rounded-full px-8 bg-foreground text-mainColor"
+        onClick={handleAddTodo}
+      >
+        Add Todo
+      </Button> */}
     </div>
   );
 }

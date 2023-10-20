@@ -4,6 +4,8 @@ import { Todo as TodoType, User } from "@prisma/client";
 import DeleteModal from "../DeleteModal";
 import { useState } from "react";
 import ActiveSelector from "./ActiveSelector";
+import toast from "react-hot-toast";
+import { Button } from "../ui/button";
 
 interface StateManagerProps {
   activeTodos: "LISTOFTODOS" | "COMPLETED" | "INCOMPLETE";
@@ -13,12 +15,14 @@ interface StateManagerProps {
   numberOfTodos: number;
   setListOfTodos: React.Dispatch<React.SetStateAction<TodoType[]>>;
   user: User | undefined | null;
+  completedTodos: number;
 }
 export default function StateManager({
   activeTodos,
   setActiveTodos,
   numberOfTodos,
   setListOfTodos,
+  completedTodos,
   user,
 }: StateManagerProps) {
   const [open, setOpen] = useState(false);
@@ -47,7 +51,13 @@ export default function StateManager({
       </div>
       <h1
         className="text-foreground/30 hover:text-foreground cursor-pointer transition-all duration-300 sm:w-full text-right "
-        onClick={() => setOpen(true)}
+        onClick={() => {
+          completedTodos > 0
+            ? setOpen(true)
+            : toast((t) => <span>You have no completed todos </span>, {
+                duration: 1500,
+              });
+        }}
       >
         Clear Completed
       </h1>
