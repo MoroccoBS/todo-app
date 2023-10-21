@@ -98,7 +98,7 @@ body,
     /* --Completed: hsl(237, 14%, 26%); */
     --Completed: hsl(235, 13%, 35%);
     --BodyBg: hsl(235, 21%, 11%);
-    --BgMobile: url("/images/bg-mobile-dark.jpp");
+    --BgMobile: url("/images/bg-mobile-dark.jpg");
     --BgDesktop: url("/images/bg-desktop-dark.jpg");
     --TodoBorder: hsl(235, 18%, 26%);
     --cont-shadow: 0 0 0 100vw rgba(0, 0, 0, 0.5);
