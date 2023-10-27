@@ -1,4 +1,4 @@
-import { Todo as TodoType } from "@prisma/client";
+import { Todo as TodoType, User } from "@prisma/client";
 import Image from "next/image";
 import {
   DropdownMenu,
@@ -12,10 +12,10 @@ import toast from "react-hot-toast";
 
 interface ProfileProps {
   setListOfTodos: React.Dispatch<React.SetStateAction<TodoType[]>>;
-  image: string | undefined | null;
+  user: User | undefined | null;
 }
 
-export default function Profile({ setListOfTodos, image }: ProfileProps) {
+export default function Profile({ setListOfTodos, user }: ProfileProps) {
   const handleLogOut = async () => {
     try {
       await toast.promise(
@@ -39,14 +39,14 @@ export default function Profile({ setListOfTodos, image }: ProfileProps) {
     <DropdownMenu>
       <DropdownMenuTrigger className="w-12 aspect-square rounded-full overflow-hidden relative cursor-pointer shadow-lg hover:scale-105 transition-all">
         <Image
-          src={image || "/41.png"}
+          src={user?.image || "/41.png"}
           alt="AvatarFallback"
           fill
           className="object-cover w-full h-full"
         />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="bg-mainColor text-md p-2 px-3 flex flex-col gap-2">
-        <h1 className="">My Account</h1>
+        <h1 className="">Hi, {user?.name}</h1>
         <DropdownMenuSeparator className="bg-TodoBorder" />
         <Button className="bg-mainColor text-foreground hover:bg-foreground hover:text-mainColor">
           Profile

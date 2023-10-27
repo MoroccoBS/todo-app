@@ -56,6 +56,7 @@ export default function TodosContainer({ user, todos }: TodosContainerProps) {
           setActiveTodos={setActiveTodos}
           setListOfTodos={setListOfTodos}
           numberOfTodos={incompleteTodos.length}
+          completedTodos={completedTodos.length}
           user={user}
         />
       </div>

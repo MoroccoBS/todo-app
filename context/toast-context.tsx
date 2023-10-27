@@ -7,7 +7,7 @@ export default function ToastContext() {
       reverseOrder={false}
       toastOptions={{
         style: {
-          backgroundColor: "hsl(var(--background))",
+          backgroundColor: "var(--MainColor)",
           color: "hsl(var(--foreground))",
         },
       }}

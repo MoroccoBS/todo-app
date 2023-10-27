@@ -32,6 +32,14 @@ export default function EditModal({
 }: EditModalProps) {
   const [value, setValue] = useState(todo?.content || "");
   const [error, setError] = useState(false);
+
+  const handleOkRemove = async (data: any) => {
+    setIsOpen(false);
+    setTodos?.((prev) =>
+      prev.map((prevTodo) => (prevTodo.id === data.id ? data : prevTodo))
+    );
+  };
+
   const handleEditTodo = async () => {
     if (!value) {
       setError(true);
@@ -45,13 +53,7 @@ export default function EditModal({
             content: value,
           })
           .then((res) => {
-            res.statusText === "OK" && setIsOpen(false);
-            res.statusText === "OK" &&
-              setTodos?.((prev) =>
-                prev.map((prevTodo) =>
-                  prevTodo.id === res.data.id ? res.data : prevTodo
-                )
-              );
+            res.statusText === "OK" && handleOkRemove(res.data);
           }),
         {
           loading: "Editing...",
